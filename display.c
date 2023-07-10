@@ -44,6 +44,14 @@ rgb_t string2rgb(char *s) {
     return WHITE;
 }
 
+void clear_to_black (image_t img) {
+    for (int x = 0; x < WIDTH; ++x) {
+        for (int y = 0; y < HEIGHT; ++y) {
+            img[x][y] = 0;
+        }
+    }
+}
+
 void show_3x5_char (image_t img, unsigned char c, rgb_t fg, rgb_t bg, uint8_t x, uint8_t y) {
     uint8_t col = 0;
     uint32_t fg_gbr = rgb2bgr32(fg);

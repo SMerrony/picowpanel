@@ -5,6 +5,7 @@
 
 #include "info_items.h"
 
+#include <malloc.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -12,6 +13,7 @@
 #include "mqtt.h"
 
 static image_t *ii_image;
+static bool showing_image;
 const int INFO_ITEM_COUNT = 4;
 
 info_item_t info_items[] = {
@@ -23,10 +25,21 @@ info_item_t info_items[] = {
 
 void ii_setup(image_t *image) {
     ii_image = image;
+    showing_image = true;
+}
+
+uint32_t getTotalHeap(void) {
+   extern char __StackLimit, __bss_end__;
+   return &__StackLimit  - &__bss_end__;
+}
+
+uint32_t getFreeHeap(void) {
+   struct mallinfo m = mallinfo();
+   return getTotalHeap() - m.uordblks;
 }
 
 void show_data(int id, const char *data, int len) {
-    if (id < INFO_ITEM_COUNT) { // handle msg on a subscribed topic
+    if ((id < INFO_ITEM_COUNT) && showing_image) { // handle msg on a subscribed topic
         char info[WIDTH] = "";
         if (strlen(info_items[id].prefix) > 0) strcpy(info_items[id].prefix, info);
         strncat(info, data, len);
@@ -61,7 +74,16 @@ void show_data(int id, const char *data, int len) {
         return;
     } 
     if (id == ID_CONTROL) {
-        // TODO
+        if (strcmp(data, "Off") == 0) {
+            showing_image = false;
+            clear_to_black(*ii_image);
+        }
+        if (strcmp(data, "On") == 0) {
+            showing_image = true;
+        }
+        if (strcmp(data, "Memory") == 0) {
+            printf("INFO: Free memory: %lu\n", getFreeHeap());
+        }
         return;
     }
     if (id == ID_URGENT) {
