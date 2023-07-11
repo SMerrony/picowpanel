@@ -14,6 +14,9 @@
 
 static image_t *ii_image;
 static bool showing_image;
+static bool showing_urgent;
+static char urgent_msg[WIDTH + 1];
+
 const int INFO_ITEM_COUNT = 4;
 
 info_item_t info_items[] = {
@@ -23,9 +26,12 @@ info_item_t info_items[] = {
     {"rgbmatrix/music_hum", "", "%", 42, 22, "BLUE", "BLACK", "3x5", 2}
 };
 
+info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
+
 void ii_setup(image_t *image) {
     ii_image = image;
     showing_image = true;
+    showing_urgent = false;
 }
 
 uint32_t getTotalHeap(void) {
@@ -36,6 +42,32 @@ uint32_t getTotalHeap(void) {
 uint32_t getFreeHeap(void) {
    struct mallinfo m = mallinfo();
    return getTotalHeap() - m.uordblks;
+}
+
+void show_urgent() {
+    if (showing_urgent) {
+        show_6x10_string(*ii_image, 
+                        urgent_msg, 
+                        urgent_item.x, 
+                        urgent_item.y, 
+                        string2rgb(urgent_item.fg), 
+                        string2rgb(urgent_item.bg)
+                        );
+    }
+}
+
+/* hide_urgent displays the urgent message black-on-black
+   It is intended to be used for the blink effect. */
+void hide_urgent() {
+    if (showing_urgent) {
+        show_6x10_string(*ii_image, 
+                urgent_msg, 
+                urgent_item.x, 
+                urgent_item.y, 
+                BLACK, 
+                BLACK
+                );
+    }
 }
 
 void show_data(int id, const char *data, int len) {
@@ -87,7 +119,14 @@ void show_data(int id, const char *data, int len) {
         return;
     }
     if (id == ID_URGENT) {
-        // TODO
+        if (strlen(data) > 0) {
+            showing_urgent = true;
+            strncpy(urgent_msg, data, WIDTH);
+            show_urgent();
+        } else {
+            hide_urgent();            
+            showing_urgent = false;
+        }
         return;
     }
     

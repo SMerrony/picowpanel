@@ -58,7 +58,11 @@ int main() {
 
     printf("DEBUG: Connected to MQTT broker\n");
 
-    while (1)
+    bool flash_toggle = false;
+    while (1) {
         busy_wait_ms(1000);
+        flash_toggle = !flash_toggle;
+        if (flash_toggle) show_urgent(); else hide_urgent();
+    }
 
 }

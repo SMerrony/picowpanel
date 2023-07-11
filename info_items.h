@@ -26,5 +26,7 @@ extern info_item_t info_items[];
 
 void ii_setup(image_t *image);
 void show_data(int ix, const char *data, int len);
+void show_urgent();
+void hide_urgent();
 
 #endif
