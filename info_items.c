@@ -90,6 +90,9 @@ void show_data(int id, const char *data, int len) {
         // TODO
         return;
     }
-
-    printf("WARNING: Unexpected info item, not handled (in info_items.c)\n");
+    
+    // shouldn't get here unless we're not displaying info ("Off" control message received)
+    if (showing_image) {
+        printf("WARNING: Unexpected info item, not handled (in info_items.c)\n");
+    }
 }
