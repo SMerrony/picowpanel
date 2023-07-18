@@ -5,7 +5,7 @@
 
 #include <string.h>
 
-#include "display.h"
+#include "graphics.h"
 #include "font_3x5.h"
 #include "font_5x7.h"
 

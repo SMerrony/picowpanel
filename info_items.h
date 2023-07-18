@@ -6,7 +6,7 @@
 #ifndef INFO_ITEMS_H
 #define INFO_ITEMS_H
 
-#include "display.h"
+#include "graphics.h"
 
 typedef struct {
     char topic[64];     // full MQTT topic for this item

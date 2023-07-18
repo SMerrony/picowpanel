@@ -113,3 +113,10 @@ void mqtt_connect() {
         mqtt_connect();
     }
 }
+
+bool mqtt_connected() {
+    if (mqtt_client_is_connected(client) == 1)
+        return true;
+    else
+        return false;
+}

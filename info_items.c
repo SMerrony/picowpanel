@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "display.h"
+#include "graphics.h"
 #include "mqtt.h"
 
 static image_t *ii_image;

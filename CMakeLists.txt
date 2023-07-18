@@ -19,7 +19,7 @@ pico_sdk_init()
 
 set(SOURCES
 	picowpanel.c
-	display.c
+	graphics.c
 	info_items.c
 	mqtt.c
 	rgbmatrix.c

@@ -23,5 +23,6 @@
 
 void mqtt_setup_client();
 void mqtt_connect();
+bool mqtt_connected();
 
 #endif
