@@ -8,13 +8,13 @@
 
 #include "lwip/apps/mqtt.h"
 
-#define CLIENT_ID "PicowClock1"
+#include "config.h"
+
 #define BROKER_HOST "192.168.1.10"
 #define BROKER_PORT 1883
 #define BROKER_KEEPALIVE 60
 #define TOPIC         "rgbmatrix/#"         // <== This is what we subscribe to
 #define URGENT_TOPIC  "rgbmatrix/urgent"
-#define CONTROL_TOPIC "rgbmatrix/control4"
 
 // User topics are matched to IDs 0 .. n
 #define ID_UNKNOWN -1

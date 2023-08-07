@@ -9,28 +9,39 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "config.h"
 #include "graphics.h"
 #include "mqtt.h"
+#include "rgbmatrix.h"
 
 static image_t *ii_image;
-static bool showing_image;
 static bool showing_urgent;
 static char urgent_msg[WIDTH + 1];
 
-const int INFO_ITEM_COUNT = 4;
-
-info_item_t info_items[] = {
-    {"rgbmatrix/time_hhmmss", "", "", 1, 0, "YELLOW", "BLACK", "3x5", 2},
-    {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1},
-    {"rgbmatrix/music_temp", "", "C", 0, 22, "CYAN", "BLACK", "3x5", 2},
-    {"rgbmatrix/music_hum", "", "%", 42, 22, "BLUE", "BLACK", "3x5", 2}
-};
-
-info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
+#ifdef CLOCK1
+    const int INFO_ITEM_COUNT = 4;
+    info_item_t info_items[] = {
+        {"rgbmatrix/time_hhmmss", "", "", 1, 0, "YELLOW", "BLACK", "3x5", 2},
+        {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1},
+        {"rgbmatrix/music_temp", "", "C", 0, 22, "CYAN", "BLACK", "3x5", 2},
+        {"rgbmatrix/music_hum", "", "%", 42, 22, "BLUE", "BLACK", "3x5", 2}
+    };
+    info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
+#endif
+#ifdef INFOPANEL1
+    const int INFO_ITEM_COUNT = 5;
+    info_item_t info_items[] = {
+        {"rgbmatrix/time_hhmmss", "", "", 1, 0, "YELLOW", "BLACK", "3x5", 2},
+        {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1},
+        {"rgbmatrix/office_temp", "", "C", 9, 22, "CYAN", "BLACK", "3x5", 2},
+        {"rgbmatrix/outside_temp", "/ ", "", 42, 22, "BLUE", "BLACK", "3x5", 2},
+        {"rgbmatix/gbpeur", "", "", 8, 39, "MAGENTA", "BLACK", "3x5", 1}
+    };
+    info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 44, "RED", "BLACK", "5x7", 2};
+#endif
 
 void ii_setup(image_t *image) {
     ii_image = image;
-    showing_image = true;
     showing_urgent = false;
 }
 
@@ -71,7 +82,7 @@ void hide_urgent() {
 }
 
 void show_data(int id, const char *data, int len) {
-    if ((id < INFO_ITEM_COUNT) && showing_image) { // handle msg on a subscribed topic
+    if (id < INFO_ITEM_COUNT) { // handle msg on a subscribed topic
         char info[WIDTH] = "";
         if (strlen(info_items[id].prefix) > 0) strcpy(info_items[id].prefix, info);
         strncat(info, data, len);
@@ -107,11 +118,10 @@ void show_data(int id, const char *data, int len) {
     } 
     if (id == ID_CONTROL) {
         if (strcmp(data, "Off") == 0) {
-            showing_image = false;
-            clear_to_black(*ii_image);
+            set_blank_display(true);
         }
         if (strcmp(data, "On") == 0) {
-            showing_image = true;
+            set_blank_display(false);
         }
         if (strcmp(data, "Memory") == 0) {
             printf("INFO: Free memory: %lu\n", getFreeHeap());
@@ -130,8 +140,6 @@ void show_data(int id, const char *data, int len) {
         return;
     }
     
-    // shouldn't get here unless we're not displaying info ("Off" control message received)
-    if (showing_image) {
-        printf("WARNING: Unexpected info item, not handled (in info_items.c)\n");
-    }
+    // shouldn't get here
+    printf("WARNING: Unexpected info item, not handled (in info_items.c)\n");
 }

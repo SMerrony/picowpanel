@@ -38,7 +38,7 @@ static void mqtt_incoming_publish_cb( __attribute__((unused)) void *arg,
             return;
         }
     }
-    if(strcmp(topic, CONTROL_TOPIC) == 0) {
+    if(strcmp(topic, MQTT_CONTROL_TOPIC) == 0) {
         inpub_id = ID_CONTROL;
         return;
     } 
@@ -94,7 +94,7 @@ void mqtt_connect() {
     /* Setup an empty client info structure */
     memset(&ci, 0, sizeof(ci));
 
-    ci.client_id = CLIENT_ID;
+    ci.client_id = MQTT_CLIENT_ID;
     ci.keep_alive = BROKER_KEEPALIVE;
 
     if (!ip4addr_aton(BROKER_HOST, &broker_addr)) {
