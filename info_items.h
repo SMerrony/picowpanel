@@ -8,6 +8,8 @@
 
 #include "graphics.h"
 
+#define MAX_URGENT_CHARS 12
+
 typedef struct {
     char topic[64];     // full MQTT topic for this item
     char prefix[16];    // string to display before item
@@ -22,7 +24,7 @@ typedef struct {
 
 extern const int INFO_ITEM_COUNT;
 
-extern info_item_t info_items[];
+extern const info_item_t info_items[];
 
 void ii_setup(image_t *image);
 void show_data(int ix, const char *data, int len);

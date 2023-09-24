@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-static uint8_t font_5x7 [128][5] = {
+const uint8_t font_5x7 [128][5] = {
     { 0, 0, 0, 0, 0 }, // 0
     { 0, 0, 0, 0, 0 }, // 1
     { 0, 0, 0, 0, 0 }, // 2

@@ -47,14 +47,13 @@ int main() {
         printf("ERROR: Wifi failed to connect - will retry in 5s\n");
         busy_wait_ms(RETRY_MS);
     }
+    printf("DEBUG: Wifi connected\n");
 
     /* N.B. The following power management call is critical if you want to achieve smooth
             running w.r.t. MQTT message handling.  Without it, reception appears to stall
             approximately every 3 seconds. */
     int ps = cyw43_wifi_pm(&cyw43_state, cyw43_pm_value(CYW43_NO_POWERSAVE_MODE, 20, 1, 1, 1));
     printf("DEBUG: cyw43_wifi_pm returned: %d\n", ps);
-
-    printf("DEBUG: Wifi connected\n");
     
     image_ptr = core1_setup();
 
@@ -63,8 +62,7 @@ int main() {
     multicore_launch_core1(core1_entry);
 
     mqtt_setup_client();
-    mqtt_connect();
-
+    mqtt_connect();     // does not return until connection is established
     printf("DEBUG: Connected to MQTT broker\n");
 
     watchdog_enable(WATCHDOG_TIMEOUT_MS, true);

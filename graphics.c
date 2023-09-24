@@ -31,7 +31,7 @@ rgb_t bgr322rgb(uint32_t bgr) {
     return rgb; 
 }
 
-rgb_t string2rgb(char *s) {
+rgb_t string2rgb(const char *s) {
     if (strcmp("BLACK", s) == 0) return BLACK;
     if (strcmp("RED", s) == 0) return RED;
     if (strcmp("GREEN", s) == 0) return GREEN;

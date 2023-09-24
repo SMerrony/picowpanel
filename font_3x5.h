@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-static uint8_t font_3x5 [128][3] = {
+const uint8_t font_3x5 [128][3] = {
     { 0, 0, 0 }, // 0
     { 0x02, 0x05, 0x02 }, // 1 - degree symbol
     { 0, 0, 0 }, // 2

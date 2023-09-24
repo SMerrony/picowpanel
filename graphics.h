@@ -20,7 +20,7 @@ extern const rgb_t BLACK, RED, GREEN, BLUE, WHITE, CYAN, MAGENTA, YELLOW;
 
 typedef uint32_t image_t[WIDTH][HEIGHT];
 
-rgb_t string2rgb(char *s);
+rgb_t string2rgb(const char *s);
 
 void clear_to_black (image_t img);
 void show_3x5_char  (image_t img, unsigned char c, rgb_t fg, rgb_t bg, uint8_t x, uint8_t y);
