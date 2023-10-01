@@ -10,13 +10,13 @@
 #include "font_5x7.h"
 
 const rgb_t BLACK   = {0, 0, 0};
-const rgb_t RED   = {127, 0, 0};
-const rgb_t GREEN = {0, 127, 0};
-const rgb_t BLUE  = {0, 0, 127};
-const rgb_t WHITE = {127, 127, 127};
-const rgb_t CYAN = {0, 127, 127};
-const rgb_t MAGENTA = {127, 0, 127};
-const rgb_t YELLOW = {127, 127, 0};
+const rgb_t RED   = {92, 0, 0};
+const rgb_t GREEN = {0, 92, 0};
+const rgb_t BLUE  = {0, 0, 92};
+const rgb_t WHITE = {92, 92, 92};
+const rgb_t CYAN = {0, 92, 92};
+const rgb_t MAGENTA = {92, 0, 92};
+const rgb_t YELLOW = {92, 92, 0};
 
 uint32_t rgb2bgr32(rgb_t rgb) {
     uint32_t col = (rgb.g<<16 | rgb.b<<8 | rgb.r);
@@ -121,6 +121,52 @@ void show_6x10_char (image_t img, unsigned char c, rgb_t fg, rgb_t bg, uint8_t x
     }
 }
 
+void show_10x14_char (image_t img, unsigned char c, rgb_t fg, rgb_t bg, uint16_t x, uint16_t y) {
+    uint16_t col = 0;
+    uint32_t fg_gbr = rgb2bgr32(fg);
+    uint32_t bg_gbr = rgb2bgr32(bg);
+    if ((x < (WIDTH - 10)) && (y < (HEIGHT - 14))) { // Don't draw outside bounds        
+        while (col < 5) {
+            img[x + (col * 2)][y + 12] = ((font_5x7[c][col] & 0b01000000) != 0) ? fg_gbr : bg_gbr;
+            img[x + (col * 2)][y + 13] = ((font_5x7[c][col] & 0b01000000) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 12] = ((font_5x7[c][col] & 0b01000000) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 13] = ((font_5x7[c][col] & 0b01000000) != 0) ? fg_gbr : bg_gbr;
+
+            img[x + (col * 2)][y + 10] = ((font_5x7[c][col] & 0b00100000) != 0) ? fg_gbr : bg_gbr;
+            img[x + (col * 2)][y + 11] = ((font_5x7[c][col] & 0b00100000) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 10] = ((font_5x7[c][col] & 0b00100000) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 11] = ((font_5x7[c][col] & 0b00100000) != 0) ? fg_gbr : bg_gbr;
+
+            img[x + (col * 2)][y + 8] = ((font_5x7[c][col] & 0b00010000) != 0) ? fg_gbr : bg_gbr;
+            img[x + (col * 2)][y + 9] = ((font_5x7[c][col] & 0b00010000) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 8] = ((font_5x7[c][col] & 0b00010000) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 9] = ((font_5x7[c][col] & 0b00010000) != 0) ? fg_gbr : bg_gbr;
+
+            img[x + (col * 2)][y + 6] = ((font_5x7[c][col] & 0b00001000) != 0) ? fg_gbr : bg_gbr;
+            img[x + (col * 2)][y + 7] = ((font_5x7[c][col] & 0b00001000) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 6] = ((font_5x7[c][col] & 0b00001000) != 0) ? fg_gbr : bg_gbr;
+            img[x + (1 + col * 2)][y + 7] = ((font_5x7[c][col] & 0b00001000) != 0) ? fg_gbr : bg_gbr;
+
+            img[x + (col * 2)][y + 4] = ((font_5x7[c][col] & 0b00000100) != 0) ? fg_gbr : bg_gbr;
+            img[x + (col * 2)][y + 5] = ((font_5x7[c][col] & 0b00000100) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 4] = ((font_5x7[c][col] & 0b00000100) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 5] = ((font_5x7[c][col] & 0b00000100) != 0) ? fg_gbr : bg_gbr;
+
+            img[x + (col * 2)][y + 2] = ((font_5x7[c][col] & 0b00000010) != 0) ? fg_gbr : bg_gbr;
+            img[x + (col * 2)][y + 3] = ((font_5x7[c][col] & 0b00000010) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 2] = ((font_5x7[c][col] & 0b00000010) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 3] = ((font_5x7[c][col] & 0b00000010) != 0) ? fg_gbr : bg_gbr;
+
+            img[x + (col * 2)][y]         = ((font_5x7[c][col] & 0b00000001) != 0) ? fg_gbr : bg_gbr;
+            img[x + (col * 2)][y + 1]     = ((font_5x7[c][col] & 0b00000001) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y]         = ((font_5x7[c][col] & 0b00000001) != 0) ? fg_gbr : bg_gbr;
+            img[x + 1 + (col * 2)][y + 1]     = ((font_5x7[c][col] & 0b00000001) != 0) ? fg_gbr : bg_gbr;
+
+            ++col;
+        }        
+    }
+}
+
 void show_block (image_t img, uint8_t x, uint8_t y, uint8_t width, uint8_t height, rgb_t col) {
     for (int ix = x; ix < x + width; ++ix) {
         for (int iy = y; iy < y + height; ++iy) {
@@ -153,6 +199,15 @@ void show_6x10_string (image_t img, char msg[], uint8_t x, uint8_t y, rgb_t fg, 
     show_block(img, x, y, w, 10, bg);
     for (unsigned int ix = 0; ix < strlen(msg); ++ix) {
         show_6x10_char(img, msg[ix], fg, bg, x + (ix * 8), y);
+    }
+}
+
+void show_10x14_string (image_t img, char msg[], uint16_t x, uint16_t y, rgb_t fg, rgb_t bg) {
+    // clear background
+    int w = strlen(msg) * 12; // 2 pixel gap between chars
+    show_block(img, x, y, w, 12, bg);
+    for (unsigned int ix = 0; ix < strlen(msg); ++ix) {
+        show_10x14_char(img, msg[ix], fg, bg, x + (ix * 12), y);
     }
 }
 

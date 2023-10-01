@@ -12,7 +12,7 @@
 #define DATA_BASE_PIN 0
 // #define DATA_N_PINS 6
 #define ROWSEL_BASE_PIN 6
-#define ROWSEL_N_PINS 4
+#define ROWSEL_N_PINS 5 // or 4 
 #define CLK_PIN 11
 #define STROBE_PIN 12
 #define OEN_PIN 13

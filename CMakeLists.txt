@@ -17,28 +17,27 @@ set(CMAKE_BUILD_TYPE Release)
 set(PICO_BOARD pico_w)
 pico_sdk_init()
 
-set(SOURCES
-	picowpanel.c
-	graphics.c
-	info_items.c
-	mqtt.c
-	rgbmatrix.c
-	)
-
 add_executable(picowpanel ${SOURCES})
 
-pico_generate_pio_header(picowpanel ${CMAKE_CURRENT_LIST_DIR}/hub75.pio)
+pico_generate_pio_header(picowpanel ${CMAKE_CURRENT_LIST_DIR}/src/hub75.pio)
 
-target_sources(picowpanel PRIVATE picowpanel.c)
+target_sources(picowpanel PUBLIC
+	${CMAKE_SOURCE_DIR}/src/graphics.c
+	${CMAKE_SOURCE_DIR}/src/info_items.c
+	${CMAKE_SOURCE_DIR}/src/rgbmatrix.c
+	${CMAKE_SOURCE_DIR}/src/mqtt.c
+	${CMAKE_SOURCE_DIR}/src/picowpanel.c
+)
+
 
 target_include_directories(picowpanel PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
-target_compile_definitions(picowpanel PRIVATE
-	PICO_DEFAULT_UART_TX_PIN=28
-	PICO_DEFAULT_UART_RX_PIN=29
-)
+# target_compile_definitions(picowpanel PRIVATE
+# 	PICO_DEFAULT_UART_TX_PIN=28
+# 	PICO_DEFAULT_UART_RX_PIN=29
+# )
 
 target_compile_options(picowpanel PRIVATE -Werror -Wall -Wextra)
 

@@ -29,6 +29,7 @@ void show_6x10_char (image_t img, unsigned char c, rgb_t fg, rgb_t bg, uint8_t x
 void show_3x5_string (image_t img, char msg[], uint8_t x, uint8_t y, rgb_t fg, rgb_t bg);
 void show_5x7_string (image_t img, char msg[], uint8_t x, uint8_t y, rgb_t fg, rgb_t bg);
 void show_6x10_string (image_t img, char msg[], uint8_t x, uint8_t y, rgb_t fg, rgb_t bg);
+void show_10x14_string (image_t img, char msg[], uint16_t x, uint16_t y, rgb_t fg, rgb_t bg);
 
 void dim (image_t img, int div);
 

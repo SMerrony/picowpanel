@@ -31,13 +31,13 @@ static char urgent_msg[MAX_URGENT_CHARS+1];
 #ifdef INFOPANEL1
     const int INFO_ITEM_COUNT = 5;
     const info_item_t info_items[] = {
-        {"rgbmatrix/time_hhmmss", "", "", 1, 0, "YELLOW", "BLACK", "3x5", 2},
-        {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1},
-        {"rgbmatrix/office_temp", "", "C", 9, 22, "CYAN", "BLACK", "3x5", 2},
-        {"rgbmatrix/outside_temp", "/ ", "", 42, 22, "BLUE", "BLACK", "3x5", 2},
-        {"rgbmatix/gbpeur", "", "", 8, 39, "MAGENTA", "BLACK", "3x5", 1}
+        {"rgbmatrix/time_hhmm", "", "", 2, 0, "YELLOW", "BLACK", "5x7", 2},
+        {"rgbmatrix/time_date", "", "", 3, 17, "MAGENTA", "BLACK", "5x7", 1},
+        {"rgbmatrix/office_temp", "", "C", 0, 27, "CYAN", "BLACK", "3x5", 2},
+        {"rgbmatrix/outside_temp", "", "", 44, 27, "GREEN", "BLACK", "3x5", 2},
+        {"rgbmatrix/gbpeur", "", "", 8, 40, "YELLOW", "BLACK", "3x5", 1}
     };
-    info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 44, "RED", "BLACK", "5x7", 2};
+    info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 0, "RED", "BLACK", "5x7", 2};
 #endif
 
 void ii_setup(image_t *image) {
@@ -106,13 +106,23 @@ void show_data(int id, const char *data, int len) {
                                 );
             }
         } else {
-            show_5x7_string(*ii_image, 
-                            info, 
-                            info_items[id].x, 
-                            info_items[id].y, 
-                            string2rgb(info_items[id].fg), 
-                            string2rgb(info_items[id].bg)
-                            );
+            if (info_items[id].scale == 1) {
+                show_5x7_string(*ii_image, 
+                                info, 
+                                info_items[id].x, 
+                                info_items[id].y, 
+                                string2rgb(info_items[id].fg), 
+                                string2rgb(info_items[id].bg)
+                                );
+            } else {
+                    show_10x14_string(*ii_image, 
+                                info, 
+                                info_items[id].x, 
+                                info_items[id].y, 
+                                string2rgb(info_items[id].fg), 
+                                string2rgb(info_items[id].bg)
+                                );  
+            }
         }
         return;
     } 
