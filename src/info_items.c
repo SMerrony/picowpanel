@@ -26,7 +26,7 @@ static char urgent_msg[MAX_URGENT_CHARS+1];
         {"rgbmatrix/music_temp", "", "C", 0, 22, "CYAN", "BLACK", "3x5", 2},
         {"rgbmatrix/music_hum", "", "%", 42, 22, "BLUE", "BLACK", "3x5", 2}
     };
-    info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
+    const info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
 #endif
 #ifdef INFOPANEL1
     const int INFO_ITEM_COUNT = 5;
@@ -37,7 +37,7 @@ static char urgent_msg[MAX_URGENT_CHARS+1];
         {"rgbmatrix/outside_temp", "", "", 44, 27, "GREEN", "BLACK", "3x5", 2},
         {"rgbmatrix/gbpeur", "", "", 8, 40, "YELLOW", "BLACK", "3x5", 1}
     };
-    info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 0, "RED", "BLACK", "5x7", 2};
+    const info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 0, "RED", "BLACK", "5x7", 2};
 #endif
 
 void ii_setup(image_t *image) {

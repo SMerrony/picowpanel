@@ -11,15 +11,15 @@
 #define MAX_URGENT_CHARS 12
 
 typedef struct {
-    char topic[64];     // full MQTT topic for this item
-    char prefix[16];    // string to display before item
-    char suffix[16];    // string to display after item
-    int x;              // left x ordinate to start drawing
-    int y;              // top y ordinate to start drawing
-    char fg[12];        // foreground colour name
-    char bg[12];        // background colour name    
-    char font[12];      // font name - only "3x5" or "5x7"
-    int scale;          // scale factor for font - only 1 or 2 supported ATM
+    char topic[64];    // full MQTT topic for this item
+    char prefix[8];    // string to display before item
+    char suffix[8];    // string to display after item
+    int x;             // left x ordinate to start drawing
+    int y;             // top y ordinate to start drawing
+    char fg[8];        // foreground colour name
+    char bg[8];        // background colour name    
+    char font[6];      // font name - only "3x5" or "5x7"
+    int scale;         // scale factor for font - only 1 or 2 supported ATM
 } info_item_t;
 
 extern const int INFO_ITEM_COUNT;

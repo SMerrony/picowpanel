@@ -205,7 +205,7 @@ void show_6x10_string (image_t img, char msg[], uint8_t x, uint8_t y, rgb_t fg, 
 void show_10x14_string (image_t img, char msg[], uint16_t x, uint16_t y, rgb_t fg, rgb_t bg) {
     // clear background
     int w = strlen(msg) * 12; // 2 pixel gap between chars
-    show_block(img, x, y, w, 12, bg);
+    show_block(img, x, y, w, 14, bg);
     for (unsigned int ix = 0; ix < strlen(msg); ++ix) {
         show_10x14_char(img, msg[ix], fg, bg, x + (ix * 12), y);
     }

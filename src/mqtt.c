@@ -42,7 +42,7 @@ static void mqtt_incoming_publish_cb( __attribute__((unused)) void *arg,
         inpub_id = ID_CONTROL;
         return;
     } 
-    printf("DEBUG: Unmatched topic >>>%s<<< - ignoring\n", topic);
+    // printf("DEBUG: Unmatched topic >>>%s<<< - ignoring\n", topic);
 }
 
 static void mqtt_incoming_data_cb(__attribute__((unused)) void *arg, const u8_t *data, u16_t len, u8_t flags) {
