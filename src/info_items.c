@@ -24,7 +24,7 @@ static char urgent_msg[MAX_URGENT_CHARS+1];
         {"rgbmatrix/time_hhmmss", "", "", 1, 0, "YELLOW", "BLACK", "3x5", 2},
         {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1},
         {"rgbmatrix/music_temp", "", "C", 0, 22, "CYAN", "BLACK", "3x5", 2},
-        {"rgbmatrix/music_hum", "", "%", 42, 22, "BLUE", "BLACK", "3x5", 2}
+        {"rgbmatrix/music_hum", "", "%", 42, 22, "YELLOW", "BLACK", "3x5", 2}
     };
     const info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
 #endif
