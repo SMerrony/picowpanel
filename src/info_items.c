@@ -1,5 +1,5 @@
 /**
- * SPDX-FileCopyrightText: 2023 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2024 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
@@ -25,6 +25,16 @@ static char urgent_msg[MAX_URGENT_CHARS+1];
         {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1},
         {"rgbmatrix/music_temp", "", "C", 0, 22, "CYAN", "BLACK", "3x5", 2},
         {"rgbmatrix/music_hum", "", "%", 42, 22, "YELLOW", "BLACK", "3x5", 2}
+    };
+    const info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
+#endif
+#ifdef CLOCK3
+    const int INFO_ITEM_COUNT = 4;
+    const info_item_t info_items[] = {
+        {"rgbmatrix/time_hhmm", "", "", 2, 0, "YELLOW", "BLACK", "5x7", 2},
+        {"rgbmatrix/time_date", "", "", 3, 16, "MAGENTA", "BLACK", "5x7", 1},
+        {"rgbmatrix/office_temp", "", "C", 0, 24, "CYAN", "BLACK", "5X7", 1},
+        {"rgbmatrix/outside_temp", "", "C", 44, 24, "GREEN", "BLACK", "5X7", 1},
     };
     const info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
 #endif

@@ -10,7 +10,7 @@ A lot of the code is shared with my similar PicowTFTPanel project.
 title: Typical HA Setup
 ---
 flowchart LR
-    I[Internet] --- | | R[Node-Red]
+    I[Internet] --- | | R[Node-Red / HomeAssistant]
     L[LAN] --- R
     Z[Zigbee2MQTT] --- M
     R ---| |M((MQTT Broker))

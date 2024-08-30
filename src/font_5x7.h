@@ -1,10 +1,9 @@
 /**
- * SPDX-FileCopyrightText: 2023 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2024 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#ifndef FONT_5x7_H
-#define FONT_5x7_H
+#pragma once
 
 #include <stdint.h>
 
@@ -138,5 +137,3 @@ const uint8_t font_5x7 [128][5] = {
     {2, 1, 2, 4, 1}, // ~
     {0, 0, 0, 0, 0} // del
 };
-
-#endif

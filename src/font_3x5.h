@@ -1,10 +1,9 @@
 /**
- * SPDX-FileCopyrightText: 2023 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2024 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#ifndef FONT_3X5_H
-#define FONT_3X5_H
+#pragma once
 
 #include <stdint.h>
 
@@ -138,5 +137,3 @@ const uint8_t font_3x5 [128][3] = {
     { 0x02, 0x06, 0x04 }, //  ~
     { 0, 0, 0}
 };
-
-#endif

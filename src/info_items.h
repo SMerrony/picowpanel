@@ -1,10 +1,9 @@
 /**
- * SPDX-FileCopyrightText: 2023 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2024 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#ifndef INFO_ITEMS_H
-#define INFO_ITEMS_H
+#pragma once
 
 #include "graphics.h"
 
@@ -30,5 +29,3 @@ void ii_setup(image_t *image);
 void show_data(int ix, const char *data, int len);
 void show_urgent();
 void hide_urgent();
-
-#endif

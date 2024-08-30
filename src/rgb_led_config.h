@@ -1,10 +1,9 @@
 /**
- * SPDX-FileCopyrightText: 2023 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2024 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#ifndef RGB_LED_CONFIG_H
-#define RGB_LED_CONFIG_H
+#pragma once
 
 #include "config.h"
 
@@ -29,6 +28,4 @@
     #define HEIGHT 64
     // Scan is usually 16 (i.e. 1/16) for 64x32, or 32 (1/32) for 64x64 panels
     #define SCAN 32  
-#endif
-
 #endif

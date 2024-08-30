@@ -1,10 +1,9 @@
 /**
- * SPDX-FileCopyrightText: 2023 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2024 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#pragma once
 
 #include <stdint.h>
 
@@ -32,5 +31,3 @@ void show_6x10_string (image_t img, char msg[], uint8_t x, uint8_t y, rgb_t fg, 
 void show_10x14_string (image_t img, char msg[], uint16_t x, uint16_t y, rgb_t fg, rgb_t bg);
 
 void dim (image_t img, int div);
-
-#endif // DISPLAY_H
