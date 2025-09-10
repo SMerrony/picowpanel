@@ -1,5 +1,5 @@
 /**
- * SPDX-FileCopyrightText: 2023 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2025 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
@@ -17,7 +17,7 @@ ip_addr_t broker_addr;
 void mqtt_setup_client() {
     client = mqtt_client_new();
     if (client == NULL) {
-        printf("ERROR: Could not allocation new MQTT client\n");
+        printf("ERROR: Could not allocate new MQTT client\n");
     }
 }
 
@@ -94,8 +94,10 @@ void mqtt_connect() {
     /* Setup an empty client info structure */
     memset(&ci, 0, sizeof(ci));
 
-    ci.client_id = MQTT_CLIENT_ID;
-    ci.keep_alive = BROKER_KEEPALIVE;
+    ci.client_id   = MQTT_CLIENT_ID;
+    ci.client_user = BROKER_USER;
+    ci.client_pass = BROKER_PASS;
+    ci.keep_alive  = BROKER_KEEPALIVE;
 
     if (!ip4addr_aton(BROKER_HOST, &broker_addr)) {
         printf("ERROR: Could not resolve MQTT Broker address\n");

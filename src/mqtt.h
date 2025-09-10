@@ -1,5 +1,5 @@
 /**
- * SPDX-FileCopyrightText: 2023,2024 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2024,2025 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
@@ -10,8 +10,10 @@
 
 #include "config.h"
 
-#define BROKER_HOST "192.168.1.10"
+#define BROKER_HOST "192.168.1.11"
 #define BROKER_PORT 1883
+#define BROKER_USER "mqtt"
+#define BROKER_PASS "mqtt"
 #define BROKER_KEEPALIVE 60
 #define TOPIC         "rgbmatrix/#"         // <== This is what we subscribe to
 #define URGENT_TOPIC  "rgbmatrix/urgent"
