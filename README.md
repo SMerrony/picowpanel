@@ -23,8 +23,7 @@ flowchart LR
 Rename the `dummy_wifi_config.h` to `wifi_config.h` and edit it to suit your WiFi setup.
 
 * `config.h` has some basic definitions used throughout the code
-* `info_items.c` has the specific display items and their MQTT topics
+* `info_items.h` has the specific display items and their MQTT topics
 * `mqtt.h` contains the high-level MQTT connection details
-* `picowtftpanel.c` has the pin definition for the AM2302 near the top
 * `rgb_led_config.h` includes the pin connections and dimensions of the display
 

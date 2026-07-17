@@ -10,10 +10,10 @@
 #define PANEL_SIZE 6432
 
 // Define ONE of the following (see also info_items.c)
-// #define CLOCK1 // Music Room
+#define CLOCK1 // Music Room
 // #define CLOCK2 // Actually used by picotftpanel 
 // #define CLOCK3 // Bathroom
-#define CLOCK3
+// #define INFOPANEL1
 
 #ifdef CLOCK1
     #define MQTT_CLIENT_ID "PicowClock1"

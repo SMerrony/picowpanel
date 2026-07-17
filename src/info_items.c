@@ -1,5 +1,5 @@
 /**
- * SPDX-FileCopyrightText: 2023,2024 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2024,2026 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
@@ -16,41 +16,15 @@
 
 static image_t *ii_image;
 static bool showing_urgent;
+static bool showing_starting = true;
 static char urgent_msg[MAX_URGENT_CHARS+1];
 
-#ifdef CLOCK1
-    const int INFO_ITEM_COUNT = 4;
-    const info_item_t info_items[] = {
-        {"rgbmatrix/time_hhmmss", "", "", 1, 0, "YELLOW", "BLACK", "3x5", 2},
-        {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1},
-        {"rgbmatrix/music_temp", "", "C", 0, 22, "CYAN", "BLACK", "3x5", 2},
-        {"rgbmatrix/music_hum", "", "%", 42, 22, "YELLOW", "BLACK", "3x5", 2}
-    };
-    const info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
-#endif
-#ifdef CLOCK3
-    const int INFO_ITEM_COUNT = 4;
-    const info_item_t info_items[] = {
-        {"rgbmatrix/time_hhmm", "", "", 2, 0, "YELLOW", "BLACK", "5x7", 2},
-        {"rgbmatrix/time_date", "", "", 3, 16, "MAGENTA", "BLACK", "5x7", 1},
-        {"rgbmatrix/bedroom_temp", "", "C", 0, 24, "CYAN", "BLACK", "5X7", 1},
-        {"rgbmatrix/outside_temp", "", "C", 44, 24, "GREEN", "BLACK", "5X7", 1},
-    };
-    const info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2};
-#endif
-#ifdef INFOPANEL1
-    const int INFO_ITEM_COUNT = 5;
-    const info_item_t info_items[] = {
-        {"rgbmatrix/time_hhmm", "", "", 2, 0, "YELLOW", "BLACK", "5x7", 2},
-        {"rgbmatrix/time_date", "", "", 3, 17, "MAGENTA", "BLACK", "5x7", 1},
-        {"rgbmatrix/office_temp", "", "C", 0, 27, "CYAN", "BLACK", "3x5", 2},
-        {"rgbmatrix/outside_temp", "", "", 44, 27, "GREEN", "BLACK", "3x5", 2},
-        {"rgbmatrix/gbpeur", "", "", 8, 40, "YELLOW", "BLACK", "3x5", 1}
-    };
-    const info_item_t urgent_item = {URGENT_TOPIC, "", "", 0, 0, "RED", "BLACK", "5x7", 2};
-#endif
+const info_item_t info_items[] = II_INIT;
+const info_item_t urgent_item = UI_INIT;
+const int INFO_ITEM_COUNT = II_COUNT_INIT;
 
 void ii_setup(image_t *image) {
+
     ii_image = image;
     showing_urgent = false;
 }
@@ -88,7 +62,29 @@ void hide_urgent() {
                 BLACK, 
                 BLACK
                 );
+                
     }
+}
+
+void show_starting() {
+    show_5x7_string(*ii_image,
+                    "Starting...",
+                    urgent_item.x,
+                    urgent_item.y,
+                    string2rgb(urgent_item.fg), 
+                    string2rgb(urgent_item.bg)
+                    );
+}
+
+void hide_starting() {
+    show_5x7_string(*ii_image,
+                    "Starting...",
+                    urgent_item.x,
+                    urgent_item.y,
+                    BLACK,
+                    BLACK
+                    );
+    showing_starting = false;
 }
 
 void show_data(int id, const char *data, int len) {
@@ -97,6 +93,10 @@ void show_data(int id, const char *data, int len) {
         if (strlen(info_items[id].prefix) > 0) strcpy(info, info_items[id].prefix);
         strncat(info, data, len);
         if (strlen(info_items[id].suffix) > 0) strcat(info, info_items[id].suffix);
+        if (showing_starting) {
+            hide_starting();
+            showing_starting = false;
+        }
         if (strcmp(info_items[id].font, "3x5") == 0) {
             if (info_items[id].scale == 1) {
                 show_3x5_string(*ii_image, 

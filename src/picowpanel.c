@@ -61,6 +61,8 @@ int main() {
 
     multicore_launch_core1(core1_entry);
 
+    show_starting();
+
     mqtt_setup_client();
     mqtt_connect();     // does not return until connection is established
     printf("DEBUG: Connected to MQTT broker\n");

@@ -17,7 +17,7 @@ endif()
 
 cmake_minimum_required(VERSION 3.13)
 
-set(PICO_BOARD pico_w)
+set(PICO_BOARD pico2_w CACHE STRING "Board type")
 include(pico_sdk_import.cmake)
 
 project(
