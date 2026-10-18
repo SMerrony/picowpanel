@@ -1,19 +1,19 @@
 /**
- * SPDX-FileCopyrightText: 2023,2024 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2024,2026 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
 #pragma once
 
-// PANEL_SIZE should be 6464 or 6432
-// #define PANEL_SIZE 6464
-#define PANEL_SIZE 6432
+// PANEL_SIZE should be 6464 or 6432 i.e. 64x64 or 64x32 LEDs
+#define PANEL_SIZE 6464
+// #define PANEL_SIZE 6432
 
 // Define ONE of the following (see also info_items.c)
-#define CLOCK1 // Music Room
+// #define CLOCK1 // Music Room
 // #define CLOCK2 // Actually used by picotftpanel 
 // #define CLOCK3 // Bathroom
-// #define INFOPANEL1
+#define INFOPANEL1 // Office
 
 #ifdef CLOCK1
     #define MQTT_CLIENT_ID "PicowClock1"

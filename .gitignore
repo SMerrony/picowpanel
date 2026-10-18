@@ -2,3 +2,5 @@
 /build
 /lib
 wifi_config.h
+.vscode/
+.ccls-cache/
