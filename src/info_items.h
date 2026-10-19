@@ -51,7 +51,7 @@ extern const info_item_t info_items[];
     {"rgbmatrix/time_hhmm", "", "", 3, 0, "YELLOW", "BLACK", "5x7", 2},       \
       {"rgbmatrix/time_date", "", "", 2, 17, "MAGENTA", "BLACK", "5x7", 1},   \
       {"rgbmatrix/office_temp", "", "C", 0, 27, "CYAN", "BLACK", "3x5", 2},   \
-      {"rgbmatrix/outside_temp", "", "", 44, 27, "GREEN", "BLACK", "3x5", 2}, \
+      {"rgbmatrix/outside_temp", "", "", 50, 27, "GREEN", "BLACK", "3x5", 2}, \
       {"rgbmatrix/gbpeur", "", "", 7, 40, "YELLOW", "BLACK", "3x5", 1},	\
       {"rgbmatrix/info1", "", "", 0, 47, "WHITE", "BLACK", "3x5", 1},	\
       {"rgbmatrix/info2", "", "", 0, 54, "WHITE", "BLACK", "3x5", 1}	\

@@ -36,6 +36,12 @@ int main() {
         printf("INFO: Rebooted due to Watchdog timeout\n");
     }
 
+    // Set up 2nd core to run display
+    image_ptr = core1_setup();
+    ii_setup(image_ptr);
+    multicore_launch_core1(core1_entry);
+    show_starting();
+
     while (cyw43_arch_init_with_country(WIFI_COUNTRY) != 0) {
         printf("ERROR: WiFi failed to initialise - will retry in 5s\n");
         busy_wait_ms(RETRY_MS);
@@ -54,14 +60,6 @@ int main() {
             approximately every 3 seconds. */
     int ps = cyw43_wifi_pm(&cyw43_state, cyw43_pm_value(CYW43_NO_POWERSAVE_MODE, 20, 1, 1, 1));
     printf("DEBUG: cyw43_wifi_pm returned: %d\n", ps);
-    
-    image_ptr = core1_setup();
-
-    ii_setup(image_ptr);
-
-    multicore_launch_core1(core1_entry);
-
-    show_starting();
 
     mqtt_setup_client();
     mqtt_connect();     // does not return until connection is established
