@@ -4,3 +4,6 @@
 wifi_config.h
 .vscode/
 .ccls-cache/
+*#
+#*
+

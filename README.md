@@ -27,3 +27,19 @@ Rename the `dummy_wifi_config.h` to `wifi_config.h` and edit it to suit your WiF
 * `mqtt.h` contains the high-level MQTT connection details
 * `rgb_led_config.h` includes the pin connections and dimensions of the display
 
+## Build
+
+The usual process for CMake...
+
+* mkdir build
+* cd build
+* cmake ..
+* make
+ 
+Only the last step is required after the first build.
+
+## Deploy
+
+Either restart the Pico in BOOTSEL mode and drag-and-drop the picowpanel.uf2 file to it, or, 
+from a command line: `sudo picotool load -f picowpanel.uf2`
+
