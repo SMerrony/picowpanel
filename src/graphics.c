@@ -90,7 +90,7 @@ void show_6x10_char (image_t img, unsigned char c, rgb_t fg, rgb_t bg, uint8_t x
     uint8_t col = 0;
     uint32_t fg_gbr = rgb2bgr32(fg);
     uint32_t bg_gbr = rgb2bgr32(bg);
-    if ((x < (WIDTH - 3)) && (y < (HEIGHT - 4))) { // Don't draw outside bounds
+    if ((x < (WIDTH - 6)) && (y < (HEIGHT - 10))) { // Don't draw outside bounds
         while (col < 3) {
             img[x + (col * 2)][y + 8]     = ((font_3x5[c][col] & 0b00100000) != 0) ? fg_gbr : bg_gbr;
             img[x + (col * 2)][y + 9]     = ((font_3x5[c][col] & 0b00100000) != 0) ? fg_gbr : bg_gbr;

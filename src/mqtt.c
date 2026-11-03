@@ -52,8 +52,8 @@ static void mqtt_incoming_data_cb(__attribute__((unused)) void *arg, const u8_t 
         if(flags & MQTT_DATA_FLAG_LAST) {
             /* Last fragment of payload received (or whole part if payload fits receive buffer
                See MQTT_VAR_HEADER_BUFFER_LEN)  */
-            strncpy((char *)&payload, (const char *)data, (size_t) len);
-            payload[len] = '\0';
+            strncpy((char *)&payload, (const char *)data, (size_t)(sizeof(payload) - 1));
+            payload[sizeof(payload) - 1] = '\0';
             show_data(inpub_id, payload, len);
             // printf("DEBUG: Payload: %s\n", payload); 
         } else {
@@ -82,37 +82,39 @@ static void mqtt_connection_cb(mqtt_client_t *client, void *arg, mqtt_connection
         }
     } else {
         printf("ERROR: MQTT connection CB got code %d - will retry in 10s\n", status);
-        busy_wait_ms(10000);    // wait 10s and retry
-        mqtt_connect();
+        // Retry is now handled by the blocking retry loop in mqtt_connect()
     }
 }
 
 void mqtt_connect() {
-    struct mqtt_connect_client_info_t ci;
-    err_t err;
-  
-    /* Setup an empty client info structure */
-    memset(&ci, 0, sizeof(ci));
+    while (1) {
+        struct mqtt_connect_client_info_t ci;
+        err_t err;
+      
+        /* Setup an empty client info structure */
+        memset(&ci, 0, sizeof(ci));
 
-    ci.client_id   = MQTT_CLIENT_ID;
-    ci.client_user = BROKER_USER;
-    ci.client_pass = BROKER_PASS;
-    ci.keep_alive  = BROKER_KEEPALIVE;
+        ci.client_id   = MQTT_CLIENT_ID;
+        ci.client_user = BROKER_USER;
+        ci.client_pass = BROKER_PASS;
+        ci.keep_alive  = BROKER_KEEPALIVE;
 
-    if (!ip4addr_aton(BROKER_HOST, &broker_addr)) {
-        printf("ERROR: Could not resolve MQTT Broker address\n");
-        return;
-    }
-    cyw43_arch_lwip_begin(); /* start section for to lwIP access */
-    err = mqtt_client_connect(client, &broker_addr, BROKER_PORT, mqtt_connection_cb, 0, &ci);
-    cyw43_arch_lwip_end(); /* end section accessing lwIP */
+        if (!ip4addr_aton(BROKER_HOST, &broker_addr)) {
+            printf("ERROR: Could not resolve MQTT Broker address\n");
+            sleep_ms(10000);    // wait 10s and retry
+            continue;
+        }
+        cyw43_arch_lwip_begin(); /* start section for to lwIP access */
+        err = mqtt_client_connect(client, &broker_addr, BROKER_PORT, mqtt_connection_cb, 0, &ci);
+        cyw43_arch_lwip_end(); /* end section accessing lwIP */
 
-    if(err == ERR_OK) {
-        printf("DEBUG: mqtt_connect OK\n");
-    } else {
-        printf("ERROR: mqtt_connect return %d\n", err);
-        sleep_ms(10000);    // wait 10s and retry
-        mqtt_connect();
+        if(err == ERR_OK) {
+            printf("DEBUG: mqtt_connect OK\n");
+            return;    // connection established - exit retry loop
+        } else {
+            printf("ERROR: mqtt_connect return %d\n", err);
+            sleep_ms(10000);    // wait 10s and retry
+        }
     }
 }
 
