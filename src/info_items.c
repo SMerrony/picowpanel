@@ -152,7 +152,6 @@ void show_data(int id, const char *data, int len) {
         if (strlen(data) > 0) {
             showing_urgent = true;
             strncpy(urgent_msg, data, MAX_URGENT_CHARS);
-            urgent_msg[MAX_URGENT_CHARS] = '\0';
             show_urgent();
         } else {
             hide_urgent();            
