@@ -6,14 +6,14 @@
 #pragma once
 
 // PANEL_SIZE should be 6464 or 6432 i.e. 64x64 or 64x32 LEDs
-#define PANEL_SIZE 6464
-// #define PANEL_SIZE 6432
+// #define PANEL_SIZE 6464
+#define PANEL_SIZE 6432
 
 // Define ONE of the following (see also info_items.c)
 // #define CLOCK1 // Music Room
 // #define CLOCK2 // Actually used by picotftpanel 
 // #define CLOCK3 // Bathroom
-#define INFOPANEL1 // Office
+#define CLOCK_KITCHEN // Office
 
 #ifdef CLOCK1
     #define MQTT_CLIENT_ID "PicowClock1"
@@ -26,6 +26,10 @@
 #ifdef CLOCK3
     #define MQTT_CLIENT_ID "PicowClock3"
     #define MQTT_CONTROL_TOPIC "rgbmatrix/control3"
+#endif
+#ifdef CLOCK_KITCHEN
+    #define MQTT_CLIENT_ID "PicowClock5"
+    #define MQTT_CONTROL_TOPIC "rgbmatrix/control5"
 #endif
 #ifdef INFOPANEL1
     #define MQTT_CLIENT_ID "PicowPanel1"

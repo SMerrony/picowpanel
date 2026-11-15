@@ -1,3 +1,17 @@
+# == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
+if(WIN32)
+    set(USERHOME $ENV{USERPROFILE})
+else()
+    set(USERHOME $ENV{HOME})
+endif()
+set(sdkVersion 2.3.1)
+set(toolchainVersion 15_2_Rel1)
+set(picotoolVersion 2.3.1)
+set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+if (EXISTS ${picoVscode})
+    include(${picoVscode})
+endif()
+# ====================================================================================
 # SPDX-FileCopyrightText: 2023,2026 Stephen Merrony
 # SPDX-License-Identifier: BSD-3-Clause
 
@@ -39,7 +53,7 @@ target_include_directories(picowpanel PRIVATE
 # 	PICO_DEFAULT_UART_RX_PIN=29
 # )
 
-target_compile_options(picowpanel PRIVATE -Werror -Wall -Wextra)
+target_compile_options(picowpanel PRIVATE -Wall -Wextra)
 
 pico_enable_stdio_usb(picowpanel 1)
 
