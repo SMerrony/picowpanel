@@ -31,6 +31,8 @@ set(CMAKE_BUILD_TYPE Release)
 
 pico_sdk_init()
 
+add_subdirectory(pico_dht/dht)
+
 add_executable(picowpanel ${SOURCES})
 
 pico_generate_pio_header(picowpanel ${CMAKE_CURRENT_LIST_DIR}/src/hub75.pio)
@@ -57,12 +59,13 @@ target_compile_options(picowpanel PRIVATE -Wall -Wextra)
 
 pico_enable_stdio_usb(picowpanel 1)
 
-target_link_libraries(picowpanel 
+target_link_libraries(picowpanel
+	dht
+	hardware_pio
 	pico_cyw43_arch_lwip_threadsafe_background 
 	pico_lwip_mqtt
-	pico_stdlib 
-	hardware_pio
 	pico_multicore
+	pico_stdlib 
 )
 
 pico_add_extra_outputs(picowpanel)

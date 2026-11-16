@@ -1,10 +1,11 @@
 /**
- * SPDX-FileCopyrightText: 2023,2025 Stephen Merrony
+ * SPDX-FileCopyrightText: 2023,2025,2026 Stephen Merrony
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
 #include "mqtt.h"
 
+#include "math.h"
 #include "string.h"
 #include "pico/cyw43_arch.h"
 #include "pico/time.h"
@@ -122,3 +123,24 @@ bool mqtt_connected() {
     else
         return false;
 }
+
+#ifdef USE_DHT
+
+void mqtt_pub_request_cb(__attribute__((unused)) void *arg, err_t err) {
+    // MQTT_CLIENT_T *state = (MQTT_CLIENT_T *)arg;
+    if (err != 0) printf("DEBUG: mqtt_pub_request_cb: err %d\n", err);
+    // state->received++;
+}
+
+void publish_sensors(float temp, float hum) {
+    char temp_s[10];
+    char hum_s[10];
+    sprintf(temp_s, "%.1f", temp);
+    sprintf(hum_s, "%d", (int) round(hum));
+    cyw43_arch_lwip_begin();
+    mqtt_publish(client, TEMP_TOPIC, temp_s, strlen(temp_s), 0, 0, mqtt_pub_request_cb, 0);
+    mqtt_publish(client, HUMIDITY_TOPIC, hum_s, strlen(hum_s), 0, 0, mqtt_pub_request_cb, 0);
+    cyw43_arch_lwip_end();
+}
+
+#endif

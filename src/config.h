@@ -35,3 +35,12 @@
     #define MQTT_CLIENT_ID "PicowPanel1"
     #define MQTT_CONTROL_TOPIC "rgbmatrix/control1"
 #endif
+
+// Do not define this if not incorporating a DHT Temp/Hum sensor
+#define USE_DHT
+
+#ifdef USE_DHT
+    #define DHT_SAMPLE_PERIOD 120 // multiply by BLINK_PERIOD_MS to get real period
+    #define DHT_TEMP_OFFSET -0.3  // Some units need calibration and an offset applied
+    #define DHT_HUM_OFFSET 0
+#endif
