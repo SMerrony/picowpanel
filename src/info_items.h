@@ -45,30 +45,31 @@ extern const info_item_t info_items[];
     #define UI_INIT {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2}
 #endif
 #ifdef CLOCK_KITCHEN
-    #define II_COUNT_INIT 6
+    #define II_COUNT_INIT 7
     #define II_INIT { \
-        {"rgbmatrix/time_hhmm", "", "", 0, 0, "YELLOW", "BLACK", "3x5", 2}, \
-        {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1}, \
+        {"rgbmatrix/time_hh", "", ":", 1, 0, "YELLOW", "BLACK", "3x5", 2},      \
+        {"rgbmatrix/time_mm", "", "", 21, 0, "YELLOW", "BLACK", "3x5", 2},      \
+        {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1},   \
         {"rgbmatrix/kitchen_temp", "", "C", 44, 0, "WHITE", "BLACK", "3x5", 1}, \
         {"rgbmatrix/outside_temp", "", "C", 48, 6, "GREEN", "BLACK", "3x5", 1}, \
-        {"rgbmatrix/info1", "", "", 0, 20, "WHITE", "BLACK", "3x5", 1},       \
-        {"rgbmatrix/info2", "", "", 0, 26, "WHITE", "BLACK", "3x5", 1},      \
+        {"rgbmatrix/info1", "", "", 1, 20, "WHITE", "BLACK", "3x5", 1},         \
+        {"rgbmatrix/info2", "", "", 1, 26, "WHITE", "BLACK", "3x5", 1},         \
     }
     #define UI_INIT {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2}
 #endif
 #ifdef INFOPANEL1
     #define II_COUNT_INIT 8
-#define II_INIT                                                                 \
-  {                                                                             \
-    {"rgbmatrix/time_hh", "", ":", 4, 0, "YELLOW", "BLACK", "5x7", 2},          \
-        {"rgbmatrix/time_mm", "", "", 38, 0, "YELLOW", "BLACK", "5x7", 2},      \
-        {"rgbmatrix/time_date", "", "", 3, 17, "MAGENTA", "BLACK", "5x7", 1},   \
-        {"rgbmatrix/office_temp", "", "C", 0, 27, "CYAN", "BLACK", "3x5", 2},   \
-        {"rgbmatrix/outside_temp", "", "", 50, 27, "GREEN", "BLACK", "3x5", 2}, \
-        {"rgbmatrix/gbpeur", "", "", 7, 40, "YELLOW", "BLACK", "3x5", 1},       \
-        {"rgbmatrix/info1", "", "", 0, 47, "WHITE", "BLACK", "3x5", 1},         \
-        {"rgbmatrix/info2", "", "", 0, 54, "WHITE", "BLACK", "3x5", 1           \
-    }                                                                           \
+#define II_INIT                                                             \
+  {                                                                         \
+    {"rgbmatrix/time_hh", "", ":", 4, 0, "YELLOW", "BLACK", "5x7", 2},      \
+    {"rgbmatrix/time_mm", "", "", 38, 0, "YELLOW", "BLACK", "5x7", 2},      \
+    {"rgbmatrix/time_date", "", "", 3, 17, "MAGENTA", "BLACK", "5x7", 1},   \
+    {"rgbmatrix/office_temp", "", "C", 0, 27, "CYAN", "BLACK", "3x5", 2},   \
+    {"rgbmatrix/outside_temp", "", "", 50, 27, "GREEN", "BLACK", "3x5", 2}, \
+    {"rgbmatrix/gbpeur", "", "", 7, 40, "YELLOW", "BLACK", "3x5", 1},       \
+    {"rgbmatrix/info1", "", "", 1, 47, "WHITE", "BLACK", "3x5", 1},         \
+    {"rgbmatrix/info2", "", "", 1, 54, "WHITE", "BLACK", "3x5", 1           \
+    }                                                                       \
   }
 #define UI_INIT {URGENT_TOPIC, "", "", 0, 0, "RED", "BLACK", "5x7", 2}
 #endif

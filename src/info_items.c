@@ -137,19 +137,22 @@ void show_data(int id, const char *data, int len) {
         return;
     } 
     if (id == ID_CONTROL) {
-        if (strcmp(data, "Off") == 0) {
+        if (strcmp(data, "Off") == 0) {         // blank the display without clearing it
             set_blank_display(true);
         }
         if (strcmp(data, "On") == 0) {
             set_blank_display(false);
         }
-        if (strcmp(data, "Memory") == 0) {
+        if (strcmp(data, "Clear") == 0) {       // clear the display
+            clear_to_black(*ii_image);
+        }
+        if (strcmp(data, "Memory") == 0) {      // for debugging, shown via stdio
             printf("INFO: Free memory: %lu\n", getFreeHeap());
         }
         return;
     }
     if (id == ID_URGENT) {
-        if (strlen(data) > 0) {
+        if (strlen(data) > 1) { // a null string or single char (eg. SPACE) will clear it
             showing_urgent = true;
             strncpy(urgent_msg, data, MAX_URGENT_CHARS);
             show_urgent();

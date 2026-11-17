@@ -31,7 +31,7 @@
 #endif
 #ifdef CLOCK_KITCHEN
     #define MQTT_CLIENT_ID "PicowClock5"
-    #define MQTT_CONTROL_TOPIC "rgbmatrix/control5"
+    #define MQTT_CONTROL_TOPIC "rgbmatrix/control_kitchen"
 #endif
 #ifdef INFOPANEL1
     #define MQTT_CLIENT_ID "PicowPanel1"
