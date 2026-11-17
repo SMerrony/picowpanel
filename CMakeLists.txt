@@ -45,17 +45,16 @@ target_sources(picowpanel PUBLIC
 	${CMAKE_SOURCE_DIR}/src/picowpanel.c
 )
 
-
 target_include_directories(picowpanel PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
-# target_compile_definitions(picowpanel PRIVATE
-# 	PICO_DEFAULT_UART_TX_PIN=28
-# 	PICO_DEFAULT_UART_RX_PIN=29
-# )
-
-target_compile_options(picowpanel PRIVATE -Wall -Wextra)
+add_compile_options(-Wall
+        -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long int
+        )
+if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    add_compile_options(-Wno-maybe-uninitialized)
+endif()
 
 pico_enable_stdio_usb(picowpanel 1)
 

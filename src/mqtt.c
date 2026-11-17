@@ -10,6 +10,9 @@
 #include "pico/cyw43_arch.h"
 #include "pico/time.h"
 
+#include <stdio.h>
+#include <string.h>
+
 #include "info_items.h"
 
 mqtt_client_t *client;

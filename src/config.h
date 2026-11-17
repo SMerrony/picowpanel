@@ -9,13 +9,15 @@
 // #define PANEL_SIZE 6464
 #define PANEL_SIZE 6432
 
-// Define ONE of the following (see also info_items.c)
-// #define CLOCK1 // Music Room
-// #define CLOCK2 // Actually used by picotftpanel 
-// #define CLOCK3 // Bathroom
-#define CLOCK_KITCHEN // Office
+#define BLINK_PERIOD_MS 1000 // Rate of blink (used for Urgent msgs etc.)
 
-#ifdef CLOCK1
+// Define ONE of the following (see also info_items.c)
+// #define CLOCK_MUSIC // Music Room
+// #define CLOCK2 // Actually used by picotftpanel 
+// #define CLOCK_BATHROOM 
+#define CLOCK_KITCHEN 
+
+#ifdef CLOCK_MUSIC
     #define MQTT_CLIENT_ID "PicowClock1"
     #define MQTT_CONTROL_TOPIC "rgbmatrix/control4"
 #endif
@@ -40,6 +42,7 @@
 #define USE_DHT
 
 #ifdef USE_DHT
+    #define DHT_PIN 17            // GPIO17 - physical pin 22
     #define DHT_SAMPLE_PERIOD 120 // multiply by BLINK_PERIOD_MS to get real period
     #define DHT_TEMP_OFFSET -0.3  // Some units need calibration and an offset applied
     #define DHT_HUM_OFFSET 0

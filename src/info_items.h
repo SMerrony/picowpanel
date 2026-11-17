@@ -24,7 +24,7 @@ typedef struct {
 extern const int INFO_ITEM_COUNT;
 extern const info_item_t info_items[];
 
-#ifdef CLOCK1
+#ifdef CLOCK_MUSIC
     #define II_COUNT_INIT 4
     #define II_INIT { \
         {"rgbmatrix/time_hhmmss", "", "", 1, 0, "YELLOW", "BLACK", "3x5", 2}, \
@@ -34,7 +34,7 @@ extern const info_item_t info_items[];
      }
     #define UI_INIT {URGENT_TOPIC, "", "", 0, 22, "RED", "BLACK", "3x5", 2}
 #endif
-#ifdef CLOCK3
+#ifdef CLOCK_BATHROOM
     #define II_COUNT_INIT 4
     #define II_INIT { \
         {"rgbmatrix/time_hhmm", "", "", 2, 0, "YELLOW", "BLACK", "5x7", 2}, \
@@ -48,8 +48,8 @@ extern const info_item_t info_items[];
     #define II_COUNT_INIT 6
     #define II_INIT { \
         {"rgbmatrix/time_hhmm", "", "", 0, 0, "YELLOW", "BLACK", "3x5", 2}, \
-        {"rgbmatrix/time_date", "", "", 0, 12, "MAGENTA", "BLACK", "5x7", 1}, \
-        {"rgbmatrix/kitchen_temp", "", "C", 44, 0, "CYAN", "BLACK", "3x5", 1}, \
+        {"rgbmatrix/time_date", "", "", 2, 12, "MAGENTA", "BLACK", "5x7", 1}, \
+        {"rgbmatrix/kitchen_temp", "", "C", 44, 0, "WHITE", "BLACK", "3x5", 1}, \
         {"rgbmatrix/outside_temp", "", "C", 48, 6, "GREEN", "BLACK", "3x5", 1}, \
         {"rgbmatrix/info1", "", "", 0, 20, "WHITE", "BLACK", "3x5", 1},       \
         {"rgbmatrix/info2", "", "", 0, 26, "WHITE", "BLACK", "3x5", 1},      \

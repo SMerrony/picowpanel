@@ -32,7 +32,7 @@ static image_t * image_ptr;
 
 #ifdef USE_DHT
     static const dht_model_t DHT_MODEL = DHT22;
-    static const uint DATA_PIN = 19; // GPIO19 - physical pin 25
+    static const uint DATA_PIN = DHT_PIN;
 #endif
 
 int main() {
